@@ -1,0 +1,1741 @@
+<!doctype html>
+<html>
+    <head lang="en">
+      <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+      <title>Etables</title>
+        <link href="additional.css" rel="stylesheet" type="text/css">
+        <link href="jquery.jqplot.min.css" rel="stylesheet" type="text/css">
+        <link href="css/colorpicker.css" rel="stylesheet" type="text/css">
+        <link href="css/pickmeup.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <div class="shadow1"></div>
+    <aside id="aside">
+      <div class="asideClose"></div>
+      <div class="leftMenuWrap">
+        <div class="leftMenu">
+          <a href="javascript:void(0);">Preferences</a>
+          <a href="javascript:void(0);">Account</a>
+          <a href="javascript:void(0);">Password</a>
+          <a href="javascript:void(0);">Help</a>
+          <a href="javascript:void(0);">Logout</a>
+        </div>
+      </div>
+    </aside>
+    <body class="undraggable size2" ng-app="eTable" ng-controller="MainCtrl" >
+
+      <img src="img/backgr.jpg" alt="" class="bakgr">
+
+      <div class="wheelsWrap2">
+      <div class="shadow" ng-click="wheelHide()"></div>
+      <div class="wheelTable">
+        <!-- <div class="btBack" ng-click="wheelHide('back')"></div> -->
+        <p class="title">Volume vs Budget<i class="icon-c_down"></i></p>
+        <!-- <p class="title">{{wheelBlock2Name}}<i class="icon-c_down"></i></p> -->
+        <div class="tableOpt">
+          <table >
+            <tr>
+              <td>From:</td>
+              <td>To:</td>
+            </tr>
+            <tr>
+              <td class="calWrap">
+                <input type="text" id="tableDateFrom">
+                <button id="cal1" class="icon-calendar"></button>
+              </td>
+              <td class="calWrap">
+                <input type="text" id="tableDateTo" >
+                <button id="cal2" class="icon-calendar"></button>
+              </td>
+            </tr>
+            <tr>
+              <td>Order: 
+                <select name="order">
+                  <option value="desc" selected="">Descending</option>
+                  <option value="asc">Ascending</option>
+                </select>
+               </td>
+            </tr>
+            <tr>
+              <td><label><input type="checkbox" >Include % change </label></td>
+            </tr>
+          </table>
+        </div>
+        <div class="tableData">
+          <table>
+            <tbody>
+              <tr>
+                <td>2017</td>
+                <td>June</td>
+                <td>3,300</td>
+                <td>(+10%)</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>May </td>
+                <td>3,000</td>
+                <td>(+8%)</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>April</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>March</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>February</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>January</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>2016</td>
+                <td>December</td>
+                <td>1,200</td>
+                <td>(+6%)</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>November</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="wheelGraph" >
+        <!-- <div class="btBack" ng-click="wheelHide('back')"></div> -->
+        <p class="title"  ng-click="shot=!shot">Volume vs. MTD<i class="icon-c_down"></i></p>
+        <!-- <p class="title"  ng-click="shot=!shot">{{wheelBlock2Name}}<i class="icon-c_down"></i></p> -->
+        <div class="wheelopt" ng-show="shot">
+          <table>
+            <tr>
+              <td>Type:</td>
+              <td>
+                <select name="type" ng-model="type">
+                  <option value="column" selected>Column</option>
+                  <option value="bar">Bar</option>
+                  <option value="line">Line</option>
+                  <option value="dot">Dot</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td>Frequency:</td>
+              <td>
+                <select name="frequency">
+                  <option value="Daily" selected="selected">Daily</option>
+                  <option value="Weekly" >Weekly</option>
+                  <option value="Monthly" >Monthly</option>
+                  <option value="Yearly" >Yearly</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>From:</td>
+              <td>To:</td>
+            </tr>
+            <tr>
+              <td class="calWrap">
+                <input type="text" id="graphDateFrom" >
+                <button id="cal3" class="icon-calendar"></button>
+              </td>
+              <td class="calWrap">
+                <input type="text" id="graphDateTo" >
+                <button id="cal4" class="icon-calendar"></button>
+              </td>
+            </tr>
+            <tr>
+              <td>Labels:</td>
+              <td>
+                <select name="labels">
+                  <option value="desc" selected="selected">Exact</option>
+                  <option value="Rounded">Rounded to Nearest $</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>$ Labels:</td>
+              <td>
+                <select name="frequency">
+                  <option value="Rounded to Nearest $K" selected="selected">Rounded to Nearest $K</option>
+                  <option value="Rounded to Nearest $M">Rounded to Nearest $M</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>X-axis labels</td>
+              <td>
+                <select name="frequency">
+                  <option value="desc" selected="selected">Yes</option>
+                  <option value="asc">No</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="graph" ng-class="type">
+          <div class="graphColumnWrap">
+            <div id="graphColumn"  style="height:200px;width:375px; "></div>
+            <p class="l1">M</p>
+            <p class="l2">T</p>
+            <p class="l3">W</p>
+            <p class="l4">Th</p>
+            <p class="l5">F</p>
+            <p class="l6">S</p>
+            <p class="l7">Su</p>
+            <p class="l8">15</p>
+            <p class="l9">16</p>
+            <p class="l10">17</p>
+            <p class="l11">18</p>
+            <p class="l12">19</p>
+            <p class="l13">20</p>
+            <p class="l14">21</p>
+          </div>
+          <div class="graphBarWrap">
+            <div id="graphBar"  style="height:200px;width:300px; "></div>
+            <p class="l1">M</p>
+            <p class="l2">T</p>
+            <p class="l3">W</p>
+            <p class="l4">Th</p>
+            <p class="l5">F</p>
+            <p class="l6">S</p>
+            <p class="l7">Su</p>
+            <p class="l8">15</p>
+            <p class="l9">16</p>
+            <p class="l10">17</p>
+            <p class="l11">18</p>
+            <p class="l12">19</p>
+            <p class="l13">20</p>
+            <p class="l14">21</p>
+        </div>
+          <div class="graphLineWrap">
+            <div id="graphLine"  style="height:200px;width:375px;"></div>
+            <p class="l1">M</p>
+            <p class="l2">T</p>
+            <p class="l3">W</p>
+            <p class="l4">Th</p>
+            <p class="l5">F</p>
+            <p class="l6">S</p>
+            <p class="l7">Su</p>
+            <p class="l8">15</p>
+            <p class="l9">16</p>
+            <p class="l10">17</p>
+            <p class="l11">18</p>
+            <p class="l12">19</p>
+            <p class="l13">20</p>
+            <p class="l14">21</p>
+        </div>
+          <div class="graphDotWrap">
+            <div id="graphDot"  style="height:200px;width:350px;"></div>
+        </div>
+        </div>
+      </div>
+        <div class="wheelNHide wheelHide" id="wheelNHide">
+          <div class="closeBt"  ng-click="wheelHide()"></div>
+          <p>Rows:</p>
+          <div class="cf nestable-lists">
+            <div class="dd" id="nestable">
+              <p class="nestable-title" >Available:</p>
+                <ol class="dd-list">
+                    <li class="dd-item" data-id="1">
+                        <div class="dd-handle">Group Sales</div>
+                    </li>
+                </ol>
+            </div>
+            <div class="dd" id="nestable2">
+              <p class="nestable-title" >Selected:</p>
+                <ol class="dd-list">
+                    <li class="dd-item" data-id="13">
+                        <div class="dd-handle">Admissions</div>
+                            <ol class="dd-list">
+                            <li class="dd-item" data-id="14"><div class="dd-handle">Adult</div></li>
+                            <li class="dd-item" data-id="15"><div class="dd-handle">Child</div></li>
+                            <li class="dd-item" data-id="16"><div class="dd-handle">Other</div></li>
+                        </ol>
+                    </li>
+                    <li class="dd-item" data-id="17">
+                        <div class="dd-handle">Memberships </p></div>
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="18"><div class="dd-handle">Individual</div></li>
+                            <li class="dd-item" data-id="19"><div class="dd-handle">Family</div></li>
+                            <li class="dd-item" data-id="20"><div class="dd-handle">Family Plus</div></li>
+                            <li class="dd-item" data-id="21"><div class="dd-handle">Family Deluxe</div></li>
+                            <li class="dd-item" data-id="22"><div class="dd-handle">Contributor</div></li>
+                            <li class="dd-item" data-id="23"><div class="dd-handle">Other</div></li>
+                        </ol>
+                    </li>
+                    <li class="dd-item" data-id="24">
+                        <div class="dd-handle">Concessions </div>
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="25"><div class="dd-handle">Parking</div></li>
+                            <li class="dd-item" data-id="26"><div class="dd-handle">Aramark</div></li>
+                            <li class="dd-item" data-id="27"><div class="dd-handle">Event Network</div></li>
+                            <li class="dd-item" data-id="28"><div class="dd-handle">Attractions</div></li>
+                            <li class="dd-item" data-id="29"><div class="dd-handle">Other</div></li>
+                        </ol>
+                    </li>
+                    <li class="dd-item" data-id="30">
+                        <div class="dd-handle">Contributed</div>
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="31"><div class="dd-handle">ADOPT</div></li>
+                            <li class="dd-item" data-id="32"><div class="dd-handle">Annual</div></li>
+                            <li class="dd-item" data-id="33"><div class="dd-handle">Corporate</div></li>
+                            <li class="dd-item" data-id="34"><div class="dd-handle">Friends</div></li>
+                            <li class="dd-item" data-id="35"><div class="dd-handle">Foundation</div></li>
+                            <li class="dd-item" data-id="36"><div class="dd-handle">Individual</div></li>
+                            <li class="dd-item" data-id="37"><div class="dd-handle">Corporate</div></li>
+                            <li class="dd-item" data-id="38"><div class="dd-handle">Foundation</div></li>
+                            <li class="dd-item" data-id="39"><div class="dd-handle">Government</div></li>
+                            <li class="dd-item" data-id="40"><div class="dd-handle">Bequests</div></li>
+                            <li class="dd-item" data-id="41"><div class="dd-handle">Bequests</div></li>
+                            <li class="dd-item" data-id="42"><div class="dd-handle">Gala</div></li>
+                        </ol>
+                    </li>
+                    <li class="dd-item" data-id="43">
+                        <div class="dd-handle">Capital</div>
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="44"><div class="dd-handle">Transformation Plan</div></li>
+                            <li class="dd-item" data-id="45"><div class="dd-handle">Other Capital Fundraising</div></li>
+                            <li class="dd-item" data-id="46"><div class="dd-handle">KidZooU</div></li>
+                            <li class="dd-item" data-id="47"><div class="dd-handle">Strategic Initiative</div></li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="wheelRHide wheelHide wheelBlock2" data-title="Revenues:">
+          <div class="closeBt"  ng-click="wheelHide()"></div>
+          <div class="left1block">
+            <p class="wheelHide__title">{{wheelName}}:</p>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info1" id="fancy-checkbox-info1" autocomplete="off" />
+              <div class="[ btn-group ]">
+                  <label for="fancy-checkbox-info1" class="[ btn btn-info ]">
+                      <span class="[ glyphicon glyphicon-ok ]"></span>
+                      <span> </span>
+                  </label>
+                  <label for="fancy-checkbox-info1" class="[ btn btn-default active ]">Value </label>
+              </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info2" id="fancy-checkbox-info2" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info2" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info2" class="[ btn btn-default active ]">Growth vs. Prior Period</label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info3" id="fancy-checkbox-info3" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info3" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info3" class="[ btn btn-default active ]">% Growth vs. Prior Period</label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info4" id="fancy-checkbox-info4" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info4" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info4" class="[ btn btn-default active ]">Growth vs Prior Year</label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info5" id="fancy-checkbox-info5" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info5" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info5" class="[ btn btn-default active ]">% Growth vs. Prior Year</label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info6" id="fancy-checkbox-info6" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info6" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info6" class="[ btn btn-default active ]">Variance vs. Budget </label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info7" id="fancy-checkbox-info7" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info7" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info7" class="[ btn btn-default active ]">% Variance vs. Budget </label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info8" id="fancy-checkbox-info8" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info8" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info8" class="[ btn btn-default active ]">Variance vs. Forecast</label>
+            </div>
+            </div>
+            <div class="[ form-group ]">
+            <input type="checkbox" name="fancy-checkbox-info9" id="fancy-checkbox-info9" autocomplete="off" />
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-info9" class="[ btn btn-info ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-info9" class="[ btn btn-default active ]">% Variance vs. Forecast</label>
+            </div>
+            </div>
+          </div>
+          <div class="colorsBlock">
+            <p class="wheelHide__title">Threshold Colors:</p>
+            <div class="colors">
+              <p class="colorPicker1">>5%</p>
+              <p>5 to (-2%)</p>
+              <p class="colorPicker2">< (-2)%</p>
+            </div>
+          </div> 
+          <div class="hoverBlock">
+            <p class="wheelHide__title">On Hover show:</p>
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+             <select>
+               <option value="Nothing">Nothing</option>
+               <option value="Table">Table</option>
+               <option value="Graph">Graph</option>
+             </select> 
+          </div>
+        </div>
+        <div class="wheelVHide wheelHide">
+          <div class="closeBt"  ng-click="wheelHide()"></div>
+          <p class="leftTitle">Volume:</p>
+          <div class="left1Block">
+          <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info21" id="fancy-checkbox-info21" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info21" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info21" class="[ btn btn-default active ]">Value </label>
+          </div>
+
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info22" id="fancy-checkbox-info22" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info22" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info22" class="[ btn btn-default active ]">Growth vs. Prior Period</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info23" id="fancy-checkbox-info23" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info23" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info23" class="[ btn btn-default active ]">% Growth vs. Prior Period</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info24" id="fancy-checkbox-info24" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info24" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info24" class="[ btn btn-default active ]">Growth vs Prior Year</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info25" id="fancy-checkbox-info25" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info25" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info25" class="[ btn btn-default active ]">% Growth vs. Prior Year</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info26" id="fancy-checkbox-info26" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info26" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info26" class="[ btn btn-default active ]">Variance vs. Budget </label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info27" id="fancy-checkbox-info27" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info27" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info27" class="[ btn btn-default active ]">% Variance vs. Budget </label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info28" id="fancy-checkbox-info28" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info28" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info28" class="[ btn btn-default active ]">Variance vs. Forecast</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info29" id="fancy-checkbox-info29" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info29" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info29" class="[ btn btn-default active ]">% Variance vs. Forecastiv</label>
+          </div>
+      </div>
+      </div>
+        <div class="wheelMHide wheelHide">
+          <div class="closeBt"  ng-click="wheelHide()"></div>
+          <p class="leftTitle">Mix / Weighted Price:</p><p class="leftTitle2">Threshold Colors:</p>
+          <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info31" id="fancy-checkbox-info31" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info31" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info31" class="[ btn btn-default active ]">Value </label>
+          </div>
+          <div class="colors">
+            <p class="green">>5%</p>
+            <p>5 to (-2%)</p>
+            <p class="red">< (-2)%</p>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info32" id="fancy-checkbox-info32" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info32" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info32" class="[ btn btn-default active ]">Growth vs. Prior Period</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info33" id="fancy-checkbox-info33" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info33" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info33" class="[ btn btn-default active ]">% Growth vs. Prior Period</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info34" id="fancy-checkbox-info34" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info34" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info34" class="[ btn btn-default active ]">Growth vs Prior Year</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info35" id="fancy-checkbox-info35" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info35" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info35" class="[ btn btn-default active ]">% Growth vs. Prior Year</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info36" id="fancy-checkbox-info36" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info36" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info36" class="[ btn btn-default active ]">Variance vs. Budget </label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info37" id="fancy-checkbox-info37" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info37" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info37" class="[ btn btn-default active ]">% Variance vs. Budget </label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info38" id="fancy-checkbox-info38" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info38" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info38" class="[ btn btn-default active ]">Variance vs. Forecast</label>
+          </div>
+      </div>
+      <div class="[ form-group ]">
+          <input type="checkbox" name="fancy-checkbox-info39" id="fancy-checkbox-info39" autocomplete="off" />
+          <div class="[ btn-group ]">
+              <label for="fancy-checkbox-info39" class="[ btn btn-info ]">
+                  <span class="[ glyphicon glyphicon-ok ]"></span>
+                  <span> </span>
+              </label>
+              <label for="fancy-checkbox-info39" class="[ btn btn-default active ]">% Variance vs. Forecastiv</label>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="page" class="site" >
+    <div id="headWrap">
+      <div class="pageRow1">
+          <div id="hamb">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="welcome">Welcome, Vik</p>
+          <!-- <a href="javascript:void(0);" class="login">logout</a> -->
+      </div> 
+      <div class="logo"></div>
+      <div class="pageRow2">
+        <div class="wrap wrapYear">
+          <select name="year" id="select">
+             <option value="2017">2017</option>
+             <option value="2016">2016</option>
+             <option value="2015">2015</option>
+           </select>
+           <input class="inputHelp inputYear" type="text" name="year" value="" readonly>
+         </div>
+        <div class="wrap  wrapTitle" >Dashboard Report</div>
+        <div class="pageRow3">
+          <div class="wrap elDrag wrapDate">
+            <select name="date" >
+              <option value="1" selected>JUN 20-26</option>
+              <option value="2">JUN 13-19</option>
+              <option value="3">JUN 6-12</option>
+              <option value="4">MAY 30 - JUN 5</option>
+              <option value="5">JUN</option>
+              <option value="6">MAY</option>
+              <option value="7">APR</option>
+              <option value="8">MAR</option>
+              <option value="9">FEB</option>
+              <option value="10">JAN</option>
+            </select> 
+            <input class="inputHelp inputDate" type="text" name="date" value="" readonly>
+           </div>
+           <div class="wrap elDrag wrapToDate">
+             <select name="toDate">
+                <option value="mtd" selected>MTD</option>
+                 <option value="ytd">YTD</option>
+                 <input class="inputHelp inputToDate" type="text" name="toDate" value="" readonly>
+            </select> 
+           </div>
+           <div class="wrap elDrag wrapFormat">
+             <select name="format" >
+               <option value="actual" selected>ACTUAL</option>
+               <option value="planned">PLANNED</option>
+               <option value="forecast">FORECAST</option>
+               <input class="inputHelp inputFormat" type="text" name="format" value="" readonly>
+             </select> 
+          </div>
+        </div>
+        <div class=" wrapScale">
+          <p class="btSize1">A</p>
+          <p class="btSize2 active">A</p>
+          <p class="btSize3">A</p>
+          <p class="btSize4">A</p>
+        </div>
+        <div class="btnDownload"><i class="icon-download"></i></div>
+        <div class="btnPrint"><i class="icon-printer"></i></div>
+        <label id="switch">
+          <input type="checkbox" id="checkbox">
+          <span class="slider round"></span>
+        </label>
+    </div>
+      <div id="content">
+<!--          <div class="row row1"> -->
+            <div class="wrapBlock wrapBlock1" data-block="3">
+              <div class="listBlock">
+                <div class="headTitle">
+                  <!-- <button ng-click="wheelShow2('.wheelGraph','Value ')" class="hoverLink hovGraph">Graph</button> -->
+                  <!-- <button  ng-click="wheelShow2('.wheelTable','Growth vs. Prior Period')" class="hoverLink hovTable">Table</button> -->
+                  <!-- <button class="wheelTableShow">Table</button> -->
+                  <!-- <button class="wheelGraphShow">Graph</button> -->
+                  <!-- <input type="text" class="colorPicker"> -->
+                </div>
+                <table>
+                  <tbody>
+                    <tr class="header-row">
+                      <th><div class="wheel-icon wheelN" ng-click='wheelShow("Rows", ".wheelNHide")'></div></th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></i></td>
+                      <td class="toHide_1">Admissions <i class="icon-c_down"></i></td>
+                    </tr>
+                    <tr class="hide_1">
+                      <td><i class="gr"></i></td>
+                      <td>Adult</td>
+                    </tr>
+                    <tr class="hide_1">
+                      <td><i class="gr"></i></td>
+                      <td>Child</td>
+                    </tr>
+                    <tr class="hide_1">
+                      <td><i class="gr"></i></td>
+                      <td>Other</td>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></td>
+                      <td class="toHide_2">Memberships <i class="icon-c_down"></i></td>
+                    </tr>
+                    <tr class="hide_2">
+                      <td><i class="gr"></td>
+                      <td>Individual</td>
+                    </tr>
+                    <tr class="hide_2">
+                      <td><i class="gr"></td>
+                      <td>Family</td>
+                    </tr>
+                    <tr class="hide_2">
+                      <td><i class="gr"></td>
+                      <td>Family Plus</td>
+                    </tr>
+                    <tr class="hide_2">
+                      <td><i class="gr"></td>
+                      <td>Family Deluxe</td>
+                    </tr>
+                    <tr class="hide_2">
+                      <td><i class="gr"></td>
+                      <td>Contributor</td>
+                    </tr>
+                    <tr class="hide_2">
+                      <td><i class="gr"></td>
+                      <td>Other</td>
+                    </tr>
+                    <tr>
+                      <td><i class="yl"></td>
+                      <td class="toHide_7">Concessions <i class="icon-c_down"></i></td>
+                    </tr>
+                    <tr class="hide_7">
+                      <td><i class="gr"></td>
+                      <td>Parking</td>
+                    </tr>
+                    <tr class="hide_7">
+                      <td><i class="yl"></td>
+                      <td>Aramark</td>
+                    </tr>
+                    <tr class="hide_7">
+                      <td><i class="red"></td>
+                      <td>Event Network</td>
+                    </tr>
+                    <tr class="hide_7">
+                      <td><i class="yl"></td>
+                      <td>Attractions</td>
+                    </tr>
+                    <tr class="hide_7">
+                      <td><i class="yl"></td>
+                      <td>Other</td>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></td>
+                      <td class="toHide_3">Contributed<i class="icon-c_down"></i></td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="gr"></td>
+                      <td>ADOPT</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="yl"></td>
+                      <td>Annual Fund</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="red"></td>
+                      <td>Corporate Giving</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="red"></td>
+                      <td>Friends</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="gr"></td>
+                      <td>Foundation Grants</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="yl"></td>
+                      <td>Individual Designated</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="yl"></td>
+                      <td>Corporate Designated</td>
+                    <tr class="hide_3">
+                      <td><i class="yl"></td>
+                      <td>Foundation Designated</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="gr"></td>
+                      <td>Government Support</td>
+                    <tr class="hide_3">
+                      <td><i class="gr"></td>
+                      <td>Bequests</td>
+                    </tr>
+                    <tr class="hide_3">
+                      <td><i class="gr"></td>
+                      <td>Bequests Reclassed to NCI</td>
+                    <tr class="hide_3">
+                      <td><i class="gr"></td>
+                      <td>Gala</td>
+                    </tr>
+                    <tr >
+                      <td><i class="gr"></td>
+                      <td class="toHide_4">Capital<i class="icon-c_down"></i></td>
+                    </tr>
+                    <tr class="hide_4">
+                      <td><i class="gr"></td>
+                      <td>Transformation Plan</td>
+                    </tr>
+                    <tr class="hide_4">
+                      <td><i class="gr"></td>
+                      <td>Other Capital Fundraising</td>
+                    </tr>
+                    <tr class="hide_4">
+                      <td><i class="gr"></td>
+                      <td>KidZooU </td>
+                    </tr>
+                    <tr class="hide_4">
+                      <td><i class="gr"></td>
+                      <td>Strategic Initiative</td>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></td>
+                      <td>TOTAL</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="rightBlocksWrap">
+              <div class="rightBlocks" id="rightBlocks">
+                <div class="revenuesBlock tableBlock" data-blockT="1">
+                  <div class="headTitle">Revenues<div class="wheel-icon wheelR" ng-click='wheelShow("Revenues", ".wheelBlock2")'></div></div>
+                  <table>
+                    <tbody>
+                      <tr class="header-row">
+                        <th>MTD</th>
+                        <th>vs Budget</th>
+                        <th>vs Prior Year</th>
+                      </tr>
+                      <tr>
+                        <td class="gr">1 200 000</td>
+                        <td class="gr">1 150 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td class="gr">780 000</td>
+                        <td class="gr">780 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td class="gr">420 000</td>
+                        <td class="gr">420 000</td>
+                        <td class="red"><i class="icon-a-down"></i>-5%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td class="gr">850 000</td>
+                        <td class="gr">850 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td class="gr">85 000</td>
+                        <td class="gr">85 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td class="gr">255 000</td>
+                        <td class="gr">255 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td class="gr">255 000</td>
+                        <td class="gr">255 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td class="gr">170 000</td>
+                        <td class="gr">170 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td class="gr">85 000</td>
+                        <td class="gr">85 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td class="red">850 000</td>
+                        <td class="red">-5 000 (-4%)</td>
+                        <td class="red"><i class="icon-a-down"></i>3%</td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td class="gr">250 000</td>
+                        <td class="gr">250 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td class="gr">200 000</td>
+                        <td class="gr">200 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td class="gr">150 000</td>
+                        <td class="gr">150 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td class="gr">250 000</td>
+                        <td class="gr">250 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td class="gr">1 200 000</td>
+                        <td class="gr">169 000 (+19%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td class="gr">100 000</td>
+                        <td class="gr">100 000</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr >
+                        <td class="gr">700 000</td>
+                        <td class="gr">169 000 (+19%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td class="gr">200 000</td>
+                        <td class="gr">+5 000 (+11%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td class="gr">500 000</td>
+                        <td class="gr">+5 000 (+11%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td class="gr">4 800 000</td>
+                        <td class="gr">569 000 (+19%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="volumeBlock tableBlock" data-blockT="2">
+                  <div class="headTitle">Volume<div class="wheel-icon wheelV"  ng-click='wheelShow("Volume", ".wheelBlock2")'></div></div>
+                  <table>
+                    <tbody>
+                      <tr class="header-row">
+                        <th>MTD</th>
+                        <th>vs Budget</th>
+                        <th>vs Prior Year</th>
+                      </tr>
+                      <tr>
+                        <td>60 163</td>
+                        <td class="gr">60 163</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td>33 913</td>
+                        <td class="gr">33 913</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td>26 250</td>
+                        <td class="gr">26 250</td>
+                        <td class="gr"><i class="icon-a-down"></i>5%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td></td>
+                        <td class="gr">0</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td>5 844</td>
+                        <td class="gr">5 844</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>1 000</td>
+                        <td class="gr">1 000</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>1 889</td>
+                        <td class="gr">1 889</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>1 700</td>
+                        <td class="gr">1 700</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>971</td>
+                        <td class="gr">971</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>283</td>
+                        <td class="gr">283</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td>0</td>
+                        <td class="gr">11 000 (+16%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td></td>
+                        <td class="gr">5 000 (+11%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td></td>
+                        <td class="gr">5 000 (+11%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_7">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td>0</td>
+                        <td class="gr">11 000 (+16%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr">5 000 (+11%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr">5 000 (+11%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>15%</td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr >
+                        <td></td>
+                        <td class="gr"></td>
+                        <td class="gr"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="mix-weighted-priceBlock tableBlock" data-blockT="3">
+                  <div class="headTitle">Mix / Weighted Price<div class="wheel-icon wheelM" ng-click='wheelShow("Mix / Weighted Price", ".wheelBlock2")'></div></div>
+                  <table>
+                    <tbody>
+                      <tr class="header-row">
+                        <th>MTD</th>
+                        <th>vs Budget</th>
+                        <th>vs Prior Year</th>
+                      </tr>
+                      <tr>
+                        <td>20</td>
+                        <td>-</td>
+                        <td class="gr"><i class="icon-a-up"></i>20%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td>23</td>
+                        <td>-</td>
+                        <td class="gr"><i class="icon-a-up"></i>20%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td>16</td>
+                        <td>-</td>
+                        <td class="gr"><i class="icon-a-up"></i>10%</td>
+                      </tr>
+                      <tr class="hide_1">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>-</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>85</td>
+                        <td>-</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>135</td>
+                        <td>-</td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>150</td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>175</td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td>300</td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_2">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr  class="hide_7">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr  class="hide_7">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr  class="hide_7">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr  class="hide_7">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr  class="hide_7">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr >
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_3">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td>124</td>
+                        <td>-</td>
+                        <td class="gr"><i class="icon-a-up"></i>20%</td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td>85</td>
+                        <td>-</td>
+                        <td class="gr"><i class="icon-a-up"></i>20%</td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td>152</td>
+                        <td>-</td>
+                        <td class="gr"><i class="icon-a-up"></i>20%</td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr class="hide_4">
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="gr"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+            </div>
+<!--           </div> -->
+<!--           <div class="row row2"> -->
+            <div class="wrapBlock innerBlock" data-block="4">
+              <div class="attendanceBlock">
+                <div class="headTitle">Attendance</div>
+                <table>
+                  <tbody>
+                    <tr class="header-row">
+                      <th></th>
+                      <th></th>
+                      <th>MTD</th>
+                      <th>vs Budget</th>
+                      <th>vs Prior Year</th>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></i></td>
+                      <td>Admissions</td>
+                      <td class="gr">80 000</td>
+                      <td class="gr">11 000 (+16%)</td>
+                      <td class="gr"><i class="icon-a-up"></i>10%</td>
+                    </tr>
+                    <tr>
+                      <td><i class="yl"></td>
+                      <td>School and Camps</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><i class="red"></td>
+                      <td>CAP</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><i class="yl"></td>
+                      <td>Other Groups</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></td>
+                      <td>Events</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><i class="gr"></td>
+                      <td>Free</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>TOTAL</td>
+                      <td class="gr">80 000</td>
+                      <td class="gr">11 000 (+16%)</td>
+                      <td class="gr"><i class="icon-a-up"></i>10%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="wrapBlock innerBlock" data-block="5">
+              <div class="attendance-mixBlock">
+                <div class="headTitle">Attendance Mix</div>
+                <table>
+                  <tbody>
+                    <tr class="header-row">
+              
+                      <th></th>
+                      <th>MTD</th>
+                      <th>vs Budget</th>
+                      <th>vs Prior Year</th>
+                    </tr>
+                    <tr>
+                      <td>General Admission</td>
+                      <td>27%</td>
+                      <td class="gr">+3%</td>
+                      <td class="gr"><i class="icon-a-up"></i>3%</td>
+                    </tr>
+                    <tr>
+                      <td>Members</td>
+                      <td>49%</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Schools & Camps</td>
+                      <td>13%</td>
+                      <td class="red">-1%</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Groups</td>
+                      <td>6%</td>
+                      <td class="red">-1%</td>
+                      <td class="red"><i class="icon-a-down"></i>1%</td>
+                    </tr>
+                    <tr>
+                      <td>CAP</td>
+                      <td>3%</td>
+                      <td class="red">-1%</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>All Other</td>
+                      <td>2%</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>TOTAL</td>
+                      <td>100%</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+<!--           </div> -->
+<!--           <div class="row row3"> -->
+            <div class="wrapBlock innerBlock" data-block="7">
+              <div class="per-cap-spendingBlock">
+                <div class="headTitle">Spend per Capita</div>
+                <table>
+                  <tbody>
+                    <tr class="header-row">
+                      <th></th>
+                      <th>Week 1</th>
+                      <th>Week 2</th>
+                      <th>Week 3</th>
+                      <th>Week 4</th>
+                      <th>Week 5</th>
+                    </tr>
+                    <tr>
+                      <td>Admission</td>
+                      <td>23</td>
+                      <td>21</td>
+                      <td>25</td>
+                      <td>24</td>
+                      <td>23</td>
+                    </tr>
+                    <tr>
+                      <td>Parking</td>
+                      <td>16</td>
+                      <td>14</td>
+                      <td>18</td>
+                      <td>12</td>
+                      <td>16</td>
+                    </tr>
+                    <tr>
+                      <td>Aramark</td>
+                      <td>15</td>
+                      <td>12</td>
+                      <td>16</td>
+                      <td>14</td>
+                      <td>15</td>
+                    </tr>
+                    <tr>
+                      <td>Attractions</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>5</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <td>Other Guest Spending</td>
+                      <td>7</td>
+                      <td>9</td>
+                      <td>5</td>
+                      <td>6</td>
+                      <td>7</td>
+                    </tr>
+                    <tr>
+                      <td>Total per Cap</td>
+                      <td>64</td>
+                      <td>62</td>
+                      <td>68</td>
+                      <td>62</td>
+                      <td>64</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="wrapBlock innerBlock" data-block="8">
+              <div id="npsTables" >
+                <div class="npsBlock" data-blockT="1">
+                  <div class="headTitle">NPS</div>
+                  <table>
+                    <tbody>
+                      <tr class="header-row">
+                        <th></th>
+                        <th>Score</th>
+                        <th>vs goal</th>
+                        <th>vs Prior Year</th>
+                      </tr>
+                      <tr>
+                        <td>JUNE MTD</td>
+                        <td>67</td>
+                        <td class="gr">+1%</td>
+                        <td class="gr"><i class="icon-a-up"></i>3%</td>
+                      </tr>
+                      <tr>
+                        <td>YEAR TO DATE</td>
+                        <td>69</td>
+                        <td class="gr">(+2%)</td>
+                        <td class="gr"><i class="icon-a-up"></i>4%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>                
+                <div class="npsBlock manageNotes" data-blockT="2">
+                  <table>
+                    <tbody>
+                      <tr class="secondTitle">
+                        <th>Management Notes</th>
+                      </tr>
+                      <tr>
+                        <td>Hotter temperature with more rain than normal for this time of year</td>
+                      </tr>
+                      <tr>
+                        <td>Zoo closed early on June 26 for the Summer Ale Festival special event</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+<!--             </div> -->
+         </div>
+      </div>
+ </div>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <script type="text/javascript" src="js/jquery.nestable.js"></script>
+    <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="js/jqplot.barRenderer.js"></script>
+    <script type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
+    <script type="text/javascript" src="js/pointLabels.js"></script>
+
+    <script type="text/javascript" src="js/colorpicker.js"></script>
+    <script type="text/javascript" src="js/eye.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <!-- // <script type="text/javascript" src="js/layout.js"></script> -->
+
+    <script type="text/javascript" src="js/pickmeup.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>

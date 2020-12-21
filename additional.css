@@ -1,0 +1,40 @@
+figure img { border: 1px solid #ccc; }
+h1,h2,h3,h4 { clear: both; }
+/* Prevent the contents of draggable elements from being selectable. */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+
+/*#columns li ,.elDrag{
+  -moz-transition: -moz-transform 0.2s ease-out;
+  -o-transition: -o-transform 0.2s ease-out;
+  -ms-transition: -ms-transform 0.2s ease-out;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+}*/
+/*#columns li.over,
+#columns-dragOver li.over,
+#columns-dragEnd li.over,
+#columns-almostFinal li.over ,.elDrag.over{
+  border: 2px dashed #000;
+}*/
+.wrapBlock.moving {
+/*  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+   -webkit-transition: -webkit-transform 0.2s ease-out;*/
+  cursor:  move!important;
+  /*opacity:1!important;*/
+  /*border: 10px solid red;*/
+}
+/*#columns li .count ,.elDrag.count{
+  padding-top: 15px;
+  font-weight: bold;
+  text-shadow: #fff 0 1px;
+}*/
